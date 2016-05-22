@@ -1,10 +1,13 @@
-var expect    = require("chai").expect;
+var expect = require("chai").expect;
+var request = require("supertest");
+var app = require("../app");
 
-describe('example test', function() {
-    
-    it('should be true', function() {
-        expect('foo').to.equal('foo');
+describe('test routes', () => {
+
+    it('home page should respond with 200', (done) => {
+        request(app)
+            .get('/')
+            .expect(200, done);
     });
-        
+
 });
-    
