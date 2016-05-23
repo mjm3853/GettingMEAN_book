@@ -17,6 +17,15 @@ describe('Tests for each controller in others', () => {
 
             expect(mockRes.render.calledOnce).to.be.true;
         });
+        
+        it('should call render with the generic-text view', () => {
+            var mockReq = null;
+            var mockRes = { render: sinon.spy() };
+
+            locations.about(mockReq, mockRes);
+
+            expect(mockRes.render.calledWith('generic-text')).to.be.true;
+        });
 
     });
 
