@@ -12,7 +12,7 @@ module.exports.homelist = (req, res) => {
             facilities: ['Hot drinks', 'Food', 'Premium WiFi'],
             distance: '100m',
         },{
-            name: 'Murphy&#8217;s Pub',
+            name: 'Murphy\'s Pub',
             address: 'Somewhere on Elm Street',
             rating: 4,
             facilities: ['Cold drinks', 'Good WiFi'],
