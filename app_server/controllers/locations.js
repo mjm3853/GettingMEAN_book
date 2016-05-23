@@ -1,5 +1,11 @@
 module.exports.homelist = (req, res) => {
-    res.render('locations-list', { title: 'Loc8r | Home' });
+    res.render('locations-list', { 
+        title: 'Loc8r | Home',
+        pageHeader: {
+            title: 'Loc8r',
+            strapline: 'Find places to work with WiFi near you!'
+        }
+    });
 }
 
 module.exports.locationInfo = (req, res) => {
