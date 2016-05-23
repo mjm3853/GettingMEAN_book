@@ -1,19 +1,19 @@
 var expect = require("chai").expect;
 var sinon = require("sinon");
 var request = require("supertest");
-var locations = require("../app_server/controllers/others.js");
+var others = require("../app_server/controllers/others.js");
 
 
 
-describe('Tests for each controller in others', () => {
+describe('Tests for each others controller: ', () => {
 
-    describe('Test the about controller', () => {
+    describe('about controller', () => {
 
         it('should call render once', () => {
             var mockReq = null;
             var mockRes = { render: sinon.spy() };
 
-            locations.about(mockReq, mockRes);
+            others.about(mockReq, mockRes);
 
             expect(mockRes.render.calledOnce).to.be.true;
         });
@@ -22,7 +22,7 @@ describe('Tests for each controller in others', () => {
             var mockReq = null;
             var mockRes = { render: sinon.spy() };
 
-            locations.about(mockReq, mockRes);
+            others.about(mockReq, mockRes);
 
             expect(mockRes.render.calledWith('generic-text')).to.be.true;
         });
