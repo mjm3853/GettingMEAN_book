@@ -1,15 +1,10 @@
 extends layout
 
 block content
-    #banner.page-header
-        .row
-            .col-md-6.col-sm-12
-                h1= title
+  #banner.page-header
     .row
-        .col-md-6.col-sm-12
-            p
-                | Loc8r was created to help people find places to sit down and get a bit of work done.
-                | <br /><br />
-                | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc rutrum at neque a ornare. Pellentesque et ligula ante. Aliquam lacinia tortor id ipsum porttitor accumsan. Morbi vehicula metus a turpis sollicitudin, fermentum ultrices orci scelerisque. Vestibulum fringilla erat ut lectus aliquam, non efficitur erat convallis. Aliquam tempus eros bibendum sollicitudin posuere. Praesent dolor nulla, efficitur sed turpis in, venenatis accumsan nisi. Quisque eu ante at quam blandit volutpat. Cras non enim nisi. 
-                | <br /><br />
-                | Duis suscipit et quam sit amet auctor. Nunc sed hendrerit velit. Maecenas tincidunt condimentum feugiat. Nulla nec orci lacus. Maecenas ac mauris nec risus bibendum molestie. Proin et lorem sit amet enim porta dictum. Vivamus scelerisque posuere tincidunt. Donec a pellentesque elit. Ut at enim vehicula, dapibus nunc nec, aliquet nibh. Nullam pellentesque rhoncus laoreet. Pellentesque venenatis pretium eros, eu rhoncus urna tristique in. Cras arcu lorem, faucibus eu varius nec, dictum at lacus.
+      .col-md-6.col-sm-12
+        h1= title
+  .row
+    .col-md-6.col-sm-12
+      p !{(content).replace(/\n/g, '<br/>')}
