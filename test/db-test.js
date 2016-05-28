@@ -3,10 +3,10 @@ var mongoose = require("mongoose");
 
 var gracefulShutdown = require("../app_server/models/db");
 
-var common = require('../common');
-var config = common.config();
-
-var dbURI = config.db;
+var dbURI = "mongodb://localhost/Loc8r";
+if (process.env.NODE_ENV === "production") {
+    dbURI = process.env.MONGODB_URI;
+}
 
 describe('DB connection tests', () => {
     it('should be able to connect to the database', () => {
