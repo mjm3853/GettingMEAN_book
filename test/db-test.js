@@ -1,7 +1,7 @@
 var expect = require("chai").expect;
 var mongoose = require("mongoose");
 
-var gracefulShutdown = require("../app_server/models/db");
+var gracefulShutdown = require("../app_api/models/db");
 
 var dbURI = "mongodb://localhost/Loc8r";
 if (process.env.NODE_ENV === "production") {
