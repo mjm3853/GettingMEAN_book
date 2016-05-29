@@ -2,7 +2,7 @@ var expect = require("chai").expect;
 var request = require("supertest");
 var app = require("../app");
 
-describe('Test the routes', () => {
+describe('Test the server routes', () => {
 
 
     describe('home page route', () => {
