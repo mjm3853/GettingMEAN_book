@@ -15,7 +15,11 @@ module.exports.locationsCreate = (req, res) => {
 };
 
 module.exports.locationsReadOne = (req, res) => {
-    sendJsonResponse(res, 200, {'status' : 'success'});
+    Loc
+        .findById(req.params.locationid)
+        .exec((err, location) => {
+            sendJsonResponse(res, 200, location);
+        });
 };
 
 module.exports.locationsUpdateOne = (req, res) => {
