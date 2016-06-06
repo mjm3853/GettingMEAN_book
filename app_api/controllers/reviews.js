@@ -1,3 +1,6 @@
+var mongoose = require('mongoose');
+var Loc = mongoose.model('Location');
+
 var sendJsonResponse = (res, status, content) => {
     res.status(status);
     res.json(content);

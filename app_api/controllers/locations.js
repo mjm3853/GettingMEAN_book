@@ -1,3 +1,6 @@
+var mongoose = require('mongoose');
+var Loc = mongoose.model('Location');
+
 var sendJsonResponse = (res, status, content) => {
     res.status(status);
     res.json(content);
@@ -22,5 +25,3 @@ module.exports.locationsUpdateOne = (req, res) => {
 module.exports.locationsDeleteOne = (req, res) => {
     sendJsonResponse(res, 200, {'status' : 'success'});
 };
-
-

@@ -50,4 +50,4 @@ process.on('SIGTERM', () => {
 
 module.exports = gracefulShutdown;
 
-//require('.locations');
+require('./locations');
