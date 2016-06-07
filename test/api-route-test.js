@@ -18,10 +18,11 @@ describe('Tests for the API routes', () => {
                 .expect(200, done);
         });
 
-        it('GET api at /locations/:locationid should respond with 200', (done) => {
+        
+        it('GET api at /locations/:locationid with an invalid location id should respond with 404', (done) => {
             request(app)
                 .get('/api/locations/000')
-                .expect(200, done);
+                .expect(404, done);
         });
 
         it('PUT api at /locations/:locationid should respond with 404', (done) => {
@@ -43,53 +44,43 @@ describe('Tests for the API routes', () => {
         });
 
     });
-    
-    
-    /*
-    
-router.post('/locations/:locationid/reviews', ctrlReviews.reviewsCreate);
-router.get('/locations/:locationid/reviews/:reviewid', ctrlReviews.reviewsReadOne);
-router.put('/locations/:locationid/reviews/:reviewid', ctrlReviews.reviewsUpdateOne);
-router.delete('/locations/:locationid/reviews/:reviewid', ctrlReviews.reviewsDeleteOne);
-    
-    */
-    
+
     describe('reviews routes', () => {
-        
+
         it('POST api at /locations/:locationid/reviews should respond with 200', (done) => {
             request(app)
                 .post('/api/locations/000/reviews')
                 .expect(200, done);
         });
-        
-        it('GET api at /locations/:locationid/reviews/:reviewid should respond with 200', (done) => {
+
+        it('GET api at /locations/:locationid/reviews/:reviewid with invalid id should respond with 404', (done) => {
             request(app)
                 .get('/api/locations/000/reviews/000')
-                .expect(200, done);
+                .expect(404, done);
         });
-        
+
         it('PUT api at /locations/:locationid/reviews/:reviewid should respond with 200', (done) => {
             request(app)
                 .put('/api/locations/000/reviews/000')
                 .expect(200, done);
         });
-        
+
         it('DELETE api at /locations/:locationid/reviews/:reviewid should respond with 200', (done) => {
             request(app)
                 .delete('/api/locations/000/reviews/000')
                 .expect(200, done);
         });
-        
+
         it('POST api at /locations/:locationid/reviews/:reviewid should respond with 404', (done) => {
             request(app)
                 .post('/api/locations/000/reviews/000')
                 .expect(404, done);
         });
-        
-        
-            
+
+
+
     });
-        
+
 
 
 });
