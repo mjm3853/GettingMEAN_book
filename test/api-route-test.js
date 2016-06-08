@@ -6,10 +6,10 @@ var app = require("../app");
 describe('Tests for the API routes', () => {
 
     describe('locations routes', () => {
-        it('GET api at /locations should respond with 200', (done) => {
+        it('GET api at /locations without lat and lng should respond with 404', (done) => {
             request(app)
                 .get('/api/locations')
-                .expect(200, done);
+                .expect(404, done);
         });
 
         it('POST api at /locations should respond with 200', (done) => {
