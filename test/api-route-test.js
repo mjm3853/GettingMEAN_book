@@ -11,13 +11,6 @@ describe('Tests for the API routes', () => {
                 .get('/api/locations')
                 .expect(404, done);
         });
-
-        it('POST api at /locations should respond with 200', (done) => {
-            request(app)
-                .post('/api/locations')
-                .expect(200, done);
-        });
-
         
         it('GET api at /locations/:locationid with an invalid location id should respond with 404', (done) => {
             request(app)
