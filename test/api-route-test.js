@@ -40,10 +40,10 @@ describe('Tests for the API routes', () => {
 
     describe('reviews routes', () => {
 
-        it('POST api at /locations/:locationid/reviews should respond with 200', (done) => {
+        it('POST api at /locations/:locationid/reviews with invalid request should respond with 400', (done) => {
             request(app)
                 .post('/api/locations/000/reviews')
-                .expect(200, done);
+                .expect(400, done);
         });
 
         it('GET api at /locations/:locationid/reviews/:reviewid with invalid id should respond with 404', (done) => {
