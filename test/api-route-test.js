@@ -33,7 +33,7 @@ describe('Tests for the API routes', () => {
         it('DELETE api at /locations/:locationid should respond with 404', (done) => {
             request(app)
                 .delete('/api/locations/000')
-                .expect(200, done);
+                .expect(404, done);
         });
 
     });
@@ -58,10 +58,10 @@ describe('Tests for the API routes', () => {
                 .expect(404, done);
         });
 
-        it('DELETE api at /locations/:locationid/reviews/:reviewid should respond with 200', (done) => {
+        it('DELETE api at /locations/:locationid/reviews/:reviewid with invalid info should respond with 404', (done) => {
             request(app)
                 .delete('/api/locations/000/reviews/000')
-                .expect(200, done);
+                .expect(404, done);
         });
 
         it('POST api at /locations/:locationid/reviews/:reviewid should respond with 404', (done) => {

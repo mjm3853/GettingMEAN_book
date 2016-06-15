@@ -126,7 +126,7 @@ module.exports.locationsReadOne = (req, res) => {
 module.exports.locationsUpdateOne = (req, res) => {
     if (!req.params.locationid) {
         sendJsonResponse(res, 404, {
-            "message" : "Not found, locationid is required"
+            "message": "Not found, locationid is required"
         });
         return;
     }
@@ -136,7 +136,7 @@ module.exports.locationsUpdateOne = (req, res) => {
         .exec((err, location) => {
             if (!location) {
                 sendJsonResponse(res, 404, {
-                    "message" : "locationid not found"
+                    "message": "locationid not found"
                 });
                 return;
             } else if (err) {
@@ -153,21 +153,36 @@ module.exports.locationsUpdateOne = (req, res) => {
                 closing: req.body.closing1,
                 closed: req.body.closed1
             }, {
-                days: req.body.days2,
-                opening: req.body.opening2,
-                closing: req.body.closing2,
-                closed: req.body.closed2
-            }];
+                    days: req.body.days2,
+                    opening: req.body.opening2,
+                    closing: req.body.closing2,
+                    closed: req.body.closed2
+                }];
             location.save((err, location) => {
-               if (err) {
-                   sendJsonResponse(res, 404, err);
-               } else {
-                   sendJsonResponse(res, 200, location);
-               }
+                if (err) {
+                    sendJsonResponse(res, 404, err);
+                } else {
+                    sendJsonResponse(res, 200, location);
+                }
             });
         });
 };
 
 module.exports.locationsDeleteOne = (req, res) => {
-    sendJsonResponse(res, 200, { 'status': 'success' });
+    var locationid = req.params.locationid;
+    if (locationid) {
+        Loc
+            .findByIdAndRemove(locationid)
+            .exec((err, location) => {
+                if (err) {
+                    sendJsonResponse(res, 404, err);
+                    return;
+                }
+                sendJsonResponse(res, 204, null);
+            });
+    } else {
+        sendJsonResponse(res, 404, {
+            "message": "No locationid"
+        });
+    }
 };
