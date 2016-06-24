@@ -6,38 +6,39 @@ if (process.env.NODE_ENV === 'production') {
     apiOptions.server = "https://frozen-shelf-12883.herokuapp.com";
 }
 
-var renderHomepage = (req, res) => {
+var renderHomepage = (req, res, responseBody) => {
+    console.log("responseBody is: " + responseBody);
     res.render('locations-list', {
         title: 'Loc8r | Home',
         pageHeader: {
             title: 'Loc8r',
             strapline: 'Find places to work with WiFi near you!'
         },
-        locations: [{
-            name: 'Starcups',
-            address: '125 High Street, ME 41234',
-            rating: 3,
-            facilities: ['Hot drinks', 'Food', 'Premium WiFi'],
-            distance: '100m',
-        }, {
-                name: 'Murphy\'s Pub',
-                address: 'Somewhere on Elm Street',
-                rating: 4,
-                facilities: ['Cold drinks', 'Good WiFi'],
-                distance: '127m',
-            }, {
-                name: 'The Garrison Tavern',
-                address: 'Birmingham, England',
-                rating: 5,
-                facilities: ['Cold drinks', 'Danger', 'Premium WiFi'],
-                distance: '1250m',
-            }]
+        sidebar: "fix?",
+        locations: responseBody
     });
 }
 
 module.exports.homelist = (req, res) => {
-    renderHomepage(req, res);
-}
+    var requestOptions, path;
+    path = '/api/locations';
+    requestOptions = {
+        url: apiOptions.server + path,
+        method: "GET",
+        json: {},
+        qs: {
+            lng: 72.9690884,
+            lat: 20.4550411,
+            maxDistance: 1000
+        }
+    };
+    request(
+        requestOptions,
+        function(err, response, body) {
+            renderHomepage(req, res, body);
+        }
+    );
+};
 
 module.exports.locationInfo = function (req, res) {
     res.render('location-info', {

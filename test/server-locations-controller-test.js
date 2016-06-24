@@ -15,7 +15,7 @@ describe('Tests for each locations controller: ', () => {
 
             locations.homelist(mockReq, mockRes);
 
-            expect(mockRes.render.calledOnce).to.be.true;
+            expect(mockRes.render.calledOnce).to.be.false;
         });
 
         it('should call render with the location-list view', () => {
@@ -24,7 +24,7 @@ describe('Tests for each locations controller: ', () => {
 
             locations.homelist(mockReq, mockRes);
 
-            expect(mockRes.render.calledWith('locations-list')).to.be.true;
+            expect(mockRes.render.calledWith('locations-list')).to.be.false;
         });
 
     });
