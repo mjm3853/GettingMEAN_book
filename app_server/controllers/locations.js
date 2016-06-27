@@ -7,6 +7,15 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 var renderHomepage = (req, res, responseBody) => {
+    var message;
+    if (!(responseBody instanceof Array)) {
+        message = "API Lookup error";
+        responseBody = [];
+    } else {
+        if (!responseBody.length) {
+            message = "No place found nearby";
+        }
+    }
     console.log("responseBody is: " + responseBody);
     res.render('locations-list', {
         title: 'Loc8r | Home',
@@ -14,8 +23,8 @@ var renderHomepage = (req, res, responseBody) => {
             title: 'Loc8r',
             strapline: 'Find places to work with WiFi near you!'
         },
-        sidebar: "fix?",
-        locations: responseBody
+        locations: responseBody,
+        message: message
     });
 }
 
@@ -25,7 +34,7 @@ var _formatDistance = (distance) => {
         numDistance = parseFloat(distance).toFixed(1);
         unit = 'km';
     } else {
-        numDistance = parseInt(distance * 1000,10);
+        numDistance = parseInt(distance * 1000, 10);
         unit = 'm';
     }
     return numDistance + unit;
@@ -49,8 +58,10 @@ module.exports.homelist = (req, res) => {
         function (err, response, body) {
             var i, data;
             data = body;
-            for (i = 0; i < data.length; i++) {
-                data[i].distance = _formatDistance(data[i].distance);
+            if (response.statusCode === 200 && data.length) {
+                for (i = 0; i < data.length; i++) {
+                    data[i].distance = _formatDistance(data[i].distance);
+                }
             }
             renderHomepage(req, res, data);
         }
