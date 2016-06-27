@@ -9,11 +9,11 @@ if (process.env.NODE_ENV === 'production') {
 var renderHomepage = (req, res, responseBody) => {
     var message;
     if (!(responseBody instanceof Array)) {
-        message = "API Lookup error";
+        message = "Sorry, API Lookup Error";
         responseBody = [];
     } else {
         if (!responseBody.length) {
-            message = "No place found nearby";
+            message = "Sorry, no places found nearby";
         }
     }
     console.log("responseBody is: " + responseBody);
