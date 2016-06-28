@@ -28,47 +28,7 @@ var renderHomepage = (req, res, responseBody) => {
     });
 }
 
-var _formatDistance = (distance) => {
-    var numDistance, unit;
-    if (distance > 1) {
-        numDistance = parseFloat(distance).toFixed(1);
-        unit = 'km';
-    } else {
-        numDistance = parseInt(distance * 1000, 10);
-        unit = 'm';
-    }
-    return numDistance + unit;
-};
-
-module.exports.homelist = (req, res) => {
-    var requestOptions, path;
-    path = '/api/locations';
-    requestOptions = {
-        url: apiOptions.server + path,
-        method: "GET",
-        json: {},
-        qs: {
-            lng: 72.9690884,
-            lat: 20.4550411,
-            maxDistance: 1000
-        }
-    };
-    request(
-        requestOptions,
-        function (err, response, body) {
-            var i, data;
-            data = body;
-            if (response.statusCode === 200 && data.length) {
-                for (i = 0; i < data.length; i++) {
-                    data[i].distance = _formatDistance(data[i].distance);
-                }
-            }
-            renderHomepage(req, res, data);
-        }
-    );
-};
-
-module.exports.locationInfo = function (req, res) {
+var renderDetailPage = (req, res) => {
     res.render('location-info', {
         title: 'Starcups',
         pageHeader: {
@@ -114,6 +74,50 @@ module.exports.locationInfo = function (req, res) {
                 }]
         }
     });
+}
+
+var _formatDistance = (distance) => {
+    var numDistance, unit;
+    if (distance > 1) {
+        numDistance = parseFloat(distance).toFixed(1);
+        unit = 'km';
+    } else {
+        numDistance = parseInt(distance * 1000, 10);
+        unit = 'm';
+    }
+    return numDistance + unit;
+};
+
+module.exports.homelist = (req, res) => {
+    var requestOptions, path;
+    path = '/api/locations';
+    requestOptions = {
+        url: apiOptions.server + path,
+        method: "GET",
+        json: {},
+        qs: {
+            lng: 72.9690884,
+            lat: 20.4550411,
+            maxDistance: 1000
+        }
+    };
+    request(
+        requestOptions,
+        function (err, response, body) {
+            var i, data;
+            data = body;
+            if (response.statusCode === 200 && data.length) {
+                for (i = 0; i < data.length; i++) {
+                    data[i].distance = _formatDistance(data[i].distance);
+                }
+            }
+            renderHomepage(req, res, data);
+        }
+    );
+};
+
+module.exports.locationInfo = function (req, res) {
+    renderDetailPage(req, res);
 };
 
 /* GET 'Add review' page */
