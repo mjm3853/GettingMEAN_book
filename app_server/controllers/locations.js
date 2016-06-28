@@ -99,6 +99,7 @@ module.exports.locationInfo = function (req, res) {
                 lng: body.coords[0],
                 lat: body.coords[1]
             };
+            console.log("Location detail info coords:", data.coords);
             renderDetailPage(req, res, data);
         }
     );
