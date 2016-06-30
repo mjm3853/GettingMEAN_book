@@ -6,6 +6,8 @@ if (process.env.NODE_ENV === 'production') {
     apiOptions.server = "https://frozen-shelf-12883.herokuapp.com";
 }
 
+//--------------------------------------------------------
+
 var renderHomepage = (req, res, responseBody) => {
     var message;
     if (!(responseBody instanceof Array)) {
@@ -43,6 +45,8 @@ var renderDetailPage = (req, res, locDetail) => {
     });
 }
 
+//------------------------------------------
+
 var _formatDistance = (distance) => {
     var numDistance, unit;
     if (distance > 1) {
@@ -54,6 +58,24 @@ var _formatDistance = (distance) => {
     }
     return numDistance + unit;
 };
+
+var _showError = (req, res, status) => {
+    var title, content;
+    if (status === 404) {
+        title = "404, page not found";
+        content = "Oh dear. Looks like we can't find this page. Sorry.";
+    } else {
+        title = status + ", something has gone wrong";
+        content = "Sorry, we are currently experiencing technical difficulties."
+    }
+    res.status(status);
+    res.render('generic-text', {
+        title: title,
+        content: content
+    });
+};
+
+//------------------------------------------
 
 module.exports.homelist = (req, res) => {
     var requestOptions, path;
@@ -95,12 +117,16 @@ module.exports.locationInfo = function (req, res) {
         requestOptions,
         function (err, response, body) {
             var data = body;
-            data.coords = {
-                lng: body.coords[0],
-                lat: body.coords[1]
-            };
-            console.log("Location detail info coords:", data.coords);
-            renderDetailPage(req, res, data);
+            if (response.statusCode === 200) {
+                data.coords = {
+                    lng: body.coords[0],
+                    lat: body.coords[1]
+                };
+                console.log("Location detail info coords:", data.coords);
+                renderDetailPage(req, res, data);
+            } else {
+                _showError(req, res, response.statusCode);
+            }
         }
     );
 };
