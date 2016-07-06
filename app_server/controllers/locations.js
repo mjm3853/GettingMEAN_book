@@ -9,6 +9,18 @@ if (process.env.NODE_ENV === 'production') {
 //--------------------------------------------------------
 
 var renderHomepage = (req, res, responseBody) => {
+
+    res.render('locations-list', {
+        title: 'Loc8r - find a place to work with wifi',
+        pageHeader: {
+            title: 'Loc8r',
+            strapline: 'Find places to work with wifi near you!'
+        },
+        sidebar: "Looking for wifi and a seat? Loc8r helps you find places to work when out and about. Perhaps with coffee, cake or a pint? Let Loc8r help you find the place you're looking for."
+    });
+
+    /*-- Commented out to get started with Angular - pg 252
+    
     var message;
     if (!(responseBody instanceof Array)) {
         message = "Sorry, API Lookup Error";
@@ -28,6 +40,8 @@ var renderHomepage = (req, res, responseBody) => {
         locations: responseBody,
         message: message
     });
+    
+    --*/
 }
 
 var renderDetailPage = (req, res, locDetail) => {
@@ -115,6 +129,11 @@ var getLocationInfo = (req, res, callback) => {
 //------------------------------------------
 
 module.exports.homelist = (req, res) => {
+
+    renderHomepage(req, res);
+
+    /*-- Commented out to get started with Angular - pg 252
+    
     var requestOptions, path;
     path = '/api/locations';
     requestOptions = {
@@ -140,6 +159,8 @@ module.exports.homelist = (req, res) => {
             renderHomepage(req, res, data);
         }
     );
+    
+    --*/
 };
 
 module.exports.locationInfo = function (req, res) {
