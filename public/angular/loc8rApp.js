@@ -36,12 +36,15 @@ var loc8rData = function ($http) {
 };
 
 var locationListCtrl = function ($scope, loc8rData) {
+    $scope.message = "Searching for nearby places";
     loc8rData
         .success(function (data) {
+            $scope.message = data.length > 0 ? "" : "No locations found";
             $scope.data = { locations: data };
         })
         .error(function (e) {
             console.log(e);
+            $scope.message = "Sorry, something has gone wrong"
         });
 };
 
