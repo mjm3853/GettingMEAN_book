@@ -42,8 +42,8 @@ function homeCtrl($scope, loc8rData, geolocation) {
     vm.noGeo = function () {
         $scope.$apply(function () {
             vm.message = "Geolocation not supported by this browser";
-        })
-    }
+        });
+    };
 
     geolocation.getPosition(vm.getData, vm.showError, vm.noGeo);
 }
