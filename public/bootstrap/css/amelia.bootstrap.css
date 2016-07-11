@@ -5215,6 +5215,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .label-warning {
   background-color: #debb27;
+  margin-right: .3em;
 }
 
 .label-warning[href]:hover,
